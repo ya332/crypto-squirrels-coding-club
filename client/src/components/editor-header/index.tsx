@@ -56,7 +56,7 @@ function EditorHeader({
         <Container>
           <H2 onClick={() => history.push('/')}>HOME</H2>
           <H2 modifiers={['clickable']} onClick={() => setTab('EDITOR')}>
-            <Bold>&#60;&#47;&#62;</Bold> CodeTernel
+            <Bold>&#60;&#47;&#62;</Bold> The BACKYARD
           </H2>
           <ActionWrapper>
             <Select value={language} onChange={e => setLanguage(e.target.value)}>
