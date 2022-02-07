@@ -1,0 +1,17 @@
+export enum event {
+  JOIN_ROOM = 'joinRoom',
+  CONNECTION = 'connect',
+  SYNC_CODE = 'syncCode',
+  UPDATE_CODE = 'updateCode',
+  DISCONNECTION = 'disconnectFromRoom',
+  SET_ROOM_DATA = 'setRoomData',
+  UPDATED_USERS = 'updatedUsers',
+  CALL_USER = "callUser",
+  ANSWER_CALL = "answerCall",
+  SENDING_SIGNAL = "sendingSignal",
+  RETURNING_SIGNAL = "returningSignal",
+  CHANGE = "change",
+  BE_SEND_MESSAGE = "BE-send-message",
+  FE_RECEIVE_MESSAGE = "FE-receive-message",
+  READY_FOR_VIDEO_CALL = "readyForVideoCall",
+}
