@@ -27,32 +27,34 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
     return (
         <div>
             <div className="jumbotron">
-                <h1>Crypto Squirrels Coding Club</h1>
-                {currentUser
-                    ? <button onClick={signOut}>Log out</button>
-                    : <button onClick={signIn}>Log in</button>
-                }
-                {currentUser
-                    ? <p>Signed in and the current user account id is: {currentUser.accountId}</p>
-                    : <>
-                        <p>
-                            Go ahead and sign in to try it out!
-                        </p>
-                    </>
-                }
+
                 <div className="jt-container">
                     <div className="jt-image">
                         <img src="https://ipfs.infura.io/ipfs/QmfVkNR7qUjHxQWWu1kv6hR2xh9hLKJQigfaSXyWDYvqFX" width="150" height="200" alt="Crypto Coding Squirrels Club" />
                     </div>
                     <div className="jt-content">
-                        <h1>Crypto Squirrels</h1>
+                        <h1>Crypto Squirrels Coding Club</h1>
+                        {currentUser
+                            ? <button onClick={signOut}>Log out</button>
+                            : <button onClick={signIn}>Log in</button>
+                        }
+                        {currentUser
+                            ? <p>Signed in and the current user account id is: {currentUser.accountId}</p>
+                            : <>
+                                <p>
+                                    Go ahead and sign in to try it out!
+                                </p>
+                            </>
+                        }
                         <p>Become a Squirrel 🐿️ -&gt; Crack Big Tech interviews 🚀 (like you would crack a nut 🌰) Are you studying programming to get into Big Tech companies? Do you need a platform to do your mock interviews? Are you looking for people to offer mocks interview to you? Then, **you are in the right place!**</p>
                         <h2>How does the Club work?</h2>
                         <p>By purchasing one of the squirrel NFTs, you become a member of the club for life 🔥and get access to the THE BACKYARD (That's awesome, right!),
                             which is a place where you can hone your coding and programming interviewing skills.
                             THE BACKYARD offers a real-time collaborative coding editor with a support of over 10 programming languages as well as text messaging,
                             voice and video calling capabilities. Check out a THE BACKYARD in action:
+                            {' '}
                             <img src="https://bafybeiarccx2xym5yjpjy6wcbmyplzytzgv4uiej3uwpnwcfedq3zww4zi.ipfs.infura-ipfs.io/" width="400" height="200" target="_blank" />
+                            {' '}
                         </p>
                         Members use our Club to do the following:
                         <ol>

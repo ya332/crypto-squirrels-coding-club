@@ -23,17 +23,6 @@
       background: var(--secondary);
       color: var(--bg);
     }
-  
-    @media (prefers-color-scheme: dark) {
-      --bg: #25282A;
-      --fg: #fff;
-      --secondary: var(--blue);
-  
-      ::selection {
-        background: var(--secondary);
-        color: var(--fg);
-      }
-    }
   }
   
   body {
