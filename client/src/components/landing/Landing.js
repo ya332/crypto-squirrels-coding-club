@@ -102,8 +102,8 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                                 <div className="goal">
                                     <h3>✔ Finish developing THE BACKYARD</h3>
                                     <div>
-                                        <p>The BACKYARD is the real-time collaborative code editor with a support of 16 languages as well as message, voice, and video call capabilities. </p>
-                                        <p> We finish the development efforts and launch the the BACKYARD ready to be used by the members </p>
+                                        <p>The BACKYARD is workspace in our platform that offers real-time collaborative code editor with a support of 16 languages as well as message, voice, and video call capabilities. </p>
+                                        <p> We finish the development efforts and launch the BACKYARD ready to be used by the members </p>
                                     </div>
                                 </div>
                             </div>
