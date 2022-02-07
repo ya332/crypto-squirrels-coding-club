@@ -26,22 +26,20 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
 
     return (
         <div>
-            <header>
+            <div className="jumbotron">
                 <h1>Crypto Squirrels Coding Club</h1>
                 {currentUser
                     ? <button onClick={signOut}>Log out</button>
                     : <button onClick={signIn}>Log in</button>
                 }
-            </header>
-            {currentUser
-                ? <p>Signed in and the current user account id is: {currentUser.accountId}</p>
-                : <>
-                    <p>
-                        Go ahead and sign in to try it out!
-                    </p>
-                </>
-            }
-            <div className="jumbotron">
+                {currentUser
+                    ? <p>Signed in and the current user account id is: {currentUser.accountId}</p>
+                    : <>
+                        <p>
+                            Go ahead and sign in to try it out!
+                        </p>
+                    </>
+                }
                 <div className="jt-container">
                     <div className="jt-image">
                         <img src="https://ipfs.infura.io/ipfs/QmfVkNR7qUjHxQWWu1kv6hR2xh9hLKJQigfaSXyWDYvqFX" width="150" height="200" alt="Crypto Coding Squirrels Club" />
@@ -77,7 +75,7 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                                     <h3>0%</h3>
                                 </div>
                                 <div className="goal">
-                                    <h3>Create Crypto Squirrels Edition</h3>
+                                    <h3>✔ Create Crypto Squirrels Edition</h3>
                                     <div>
                                         <p>We launch Coding Club NFT Edition. Each NFT is transfered to main account on NEAR and ready to be sold</p>
                                     </div>
@@ -88,7 +86,7 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                                     <h3>25%</h3>
                                 </div>
                                 <div className="goal">
-                                    <h3>Launch of Telegram Channel</h3>
+                                    <h3>✔ Launch of Telegram Channel (t.me/CryptoSquirrelsCodingClub)</h3>
                                     <div>
                                         <p>We launch the Crypto Squirrels Telegram Channel. We recruit, market and promote the channel as well as the Club and its various benefits on social media.</p>
                                         <p> We invite enveryone to join the Telegram channel as non-members can also join the channel.</p>
@@ -100,7 +98,7 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                                     <h3>50%</h3>
                                 </div>
                                 <div className="goal">
-                                    <h3>Finish developing THE BACKYARD</h3>
+                                    <h3>✔ Finish developing THE BACKYARD</h3>
                                     <div>
                                         <p>The BACKYARD is the real-time collaborative code editor with a support of 16 languages as well as message, voice, and video call capabilities. </p>
                                         <p> We finish the development efforts and launch the the BACKYARD ready to be used by the members </p>
@@ -112,7 +110,7 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                                     <h3>60%</h3>
                                 </div>
                                 <div className="goal">
-                                    <h3>Submission to Near MetaBUILD Hackathon </h3>
+                                    <h3>🚧 Submission to Near MetaBUILD Hackathon (In progress...)</h3>
                                     <div>
                                         <p>We enter the Near MetaBUILD Hackathon to compete to win prizes so that we can support growing our community</p>
                                     </div>
@@ -120,10 +118,10 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                             </div>
                             <div className="ben">
                                 <div className="milestone">
-                                    <h3>75% to 100%</h3>
+                                    <h3>75% to 100% (In progress...)</h3>
                                 </div>
                                 <div className="goal">
-                                    <h3>Extend the Club NFT Edition</h3>
+                                    <h3>🚧 Extend the Club NFT Edition (In progress...)</h3>
                                     <div>
                                         <p>We extend the club by issuing new customized NFTs so that depending on the NFT you own,
                                             members get different benefits such as more language support, access to a debugger. </p>
