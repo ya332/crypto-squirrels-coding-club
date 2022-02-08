@@ -30,7 +30,7 @@ function NewTask() {
       {loading && <Loader />}
       <CreateTaskModal isOpen={isOpen} onClose={() => setOpen(false)} />
       <OneLine>
-        <Title>Create a new Task or use an existing one.</Title>
+        <Title>Create a new War Room in the BACKYARD or use an existing one.</Title>
         <OneLine>
           <LogoutIcon src="/logout.png" alt="logout" onClick={handleLogout} />
           <ThemeModeSwitch

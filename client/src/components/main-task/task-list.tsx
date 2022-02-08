@@ -29,9 +29,9 @@ function TaskList() {
     <Fragment>
       <ToastContainer />
       {loading && <Loader />}
-      <Title>Existing Tasks.</Title>
+      <Title>Existing War Rooms.</Title>
       <TaskContainer>
-        {data && data.map(task => <Task data={task} key={task._id} />)}
+        {data ? (data.map(task => <Task data={task} key={task._id} />)) : (<p>No war room found</p>)}
       </TaskContainer>
     </Fragment>
   )

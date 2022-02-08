@@ -34,9 +34,9 @@ function App(
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={() => <Landing wallet={wallet} nearConfig={nearConfig} currentUser={currentUser} contract={contract} />} />
-            <PrivateRoute exact path="/task" component={TaskPage} />
+            <PrivateRoute exact path="/thebackyard" component={TaskPage} />
             <Route path="/not-found" component={NotFoundPage} />
-            <PrivateRoute exact path="/task/:roomId" component={MainPage} />
+            <PrivateRoute exact path="/thebackyard/:roomId" component={MainPage} />
             <Redirect to="/not-found" />
           </Switch>
         </BrowserRouter>

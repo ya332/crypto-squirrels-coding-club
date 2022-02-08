@@ -3,6 +3,14 @@ Crypto Squirrels Coding Club
 
 Live at [https://crypto-squirrels-coding-club.herokuapp.com](https://crypto-squirrels-coding-club.herokuapp.com)
 
+Roadmap
+========
+- [x] Add Wallet login
+- [x] Create landing page
+- [x] Migrate CodeTernel code to this repo NEAR
+- [x] Deploy NFT smart contract to testnet
+- [ ] Allow redirecting to The BACKYARD if the user is logged in and has NFT. 
+- [ ] Create squirrel edition on Mintbase.io
 
 Quick Start
 ===========

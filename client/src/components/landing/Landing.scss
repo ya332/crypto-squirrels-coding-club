@@ -1,120 +1,137 @@
 * {
-    box-sizing: border-box;
-  }
-  
-  html {
-    --fg: #fff;
-    --bg: #25282A;
-    --gray: #888;
-    --royal: #0072CE;
-    --blue: #6AD1E3;
-    --primary: #D1CCBD;
-    --secondary: var(--royal);
-    --tertiary: #FF585D;
-  
-    background-color: var(--bg); /* For browsers that do not support gradients */
-    color: var(--fg);
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    font-size: calc(.65em + 0.7vw);
-    line-height: 1.3;
-  
-    ::selection {
-      background: var(--secondary);
-      color: var(--bg);
-    }
-  }
-  
-  body {
-      background-color: var(--fg); 
-      width: 100%;
-      margin: 8px;
-      font-family: "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-  }
-  
-  fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .highlight {
-    align-items: center;
-    display: flex;
-    margin-bottom: 0.5em;
-    width: 100%;
-    label {
-      margin-right: 0.5em;
-    }
-    input {
-      caret-color: var(--secondary);
-    }
-  }
-  
-  label {
-    color: var(--gray);
-  }
-  
-  button, .highlight {
-    border-radius: 5px;
-    border-color: var(--primary);
-    border: 0.1em solid var(--primary);
-    padding: 0.5em 1em;
-  
-    &:hover, &:focus, &:focus-within {
-      border-color: var(--secondary);
-    }
-  }
-  
-  input {
-    border: none;
-    flex: 1;
-    &:read-only {
-      color: var(--primary)
-    }
-  }
-  
-  input[type="number"] {
-    text-align: center;
-    border-bottom: 0.1em solid var(--primary);
-    margin: 0 1em;
-    width: 4em;
-    padding-left: 0.5em;
-    &:hover, &:focus {
-      border-color: var(--secondary);
-    }
-  }
-  
-  button, input {
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    font: inherit;
-    outline: none;
-  }
-  
-  button {
-    position: relative;
-    transition: top 50ms;
-    &:hover, &:focus {
-      top: -1px;
-    }
-    &:active {
-      background: var(--secondary);
-      border-color: var(--secondary);
-      top: 1px;
-    }
-  }
-  
-  .is-premium {
-    border-left: 0.25em solid var(--secondary);
-    padding-left: 0.25em;
-    margin-left: -0.5em;
-  }
+  box-sizing: border-box;
+}
 
-  section {
-    display: block;
+html {
+  --fg: #fff;
+  --bg: #25282a;
+  --gray: #888;
+  --royal: #0072ce;
+  --blue: #6ad1e3;
+  --primary: #d1ccbd;
+  --secondary: var(--royal);
+  --tertiary: #ff585d;
+
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: calc(0.65em + 0.7vw);
+  line-height: 1.3;
+
+  ::selection {
+    background: var(--secondary);
+    color: var(--bg);
+  }
+}
+
+body {
+  background-color: var(--bg);
+  width: 100%;
+  margin: 8px;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.root-div {
+  background-color: var(--bg);
+  width: 100%;
+  height: 100%;
+}
+
+.roadmap{
+  background-color: var(--fg);
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.highlight {
+  align-items: center;
+  display: flex;
+  margin-bottom: 0.5em;
+  width: 100%;
+  label {
+    margin-right: 0.5em;
+  }
+  input {
+    caret-color: var(--secondary);
+  }
+}
+
+label {
+  color: var(--gray);
+}
+
+button,
+.highlight {
+  border-radius: 5px;
+  border-color: var(--primary);
+  border: 0.1em solid var(--primary);
+  padding: 0.5em 1em;
+
+  &:hover,
+  &:focus,
+  &:focus-within {
+    border-color: var(--secondary);
+  }
+}
+
+input {
+  border: none;
+  flex: 1;
+  &:read-only {
+    color: var(--primary);
+  }
+}
+
+input[type="number"] {
+  text-align: center;
+  border-bottom: 0.1em solid var(--primary);
+  margin: 0 1em;
+  width: 4em;
+  padding-left: 0.5em;
+  &:hover,
+  &:focus {
+    border-color: var(--secondary);
+  }
+}
+
+button,
+input {
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: none;
+}
+
+button {
+  position: relative;
+  transition: top 50ms;
+  &:hover,
+  &:focus {
+    top: -1px;
+  }
+  &:active {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    top: 1px;
+  }
+}
+
+.is-premium {
+  border-left: 0.25em solid var(--secondary);
+  padding-left: 0.25em;
+  margin-left: -0.5em;
+}
+
+section {
+  display: block;
 }
 
 .ben {
@@ -139,7 +156,7 @@
 }
 
 .jumbotron {
-  margin-top: 30px;
+  margin-top: 0px;
   margin-bottom: 60px;
   background-color: var(--bg); /* For browsers that do not support gradients */
   color: var(--fg);
@@ -155,7 +172,7 @@
   padding: 10px;
 }
 
-.image-container{
+.image-container {
   text-align: center;
   margin: 3vh;
 }
@@ -167,10 +184,77 @@
   color: var(--fg);
 }
 
-.details a{
-  color:#D1CCBD
+.details a {
+  color: #d1ccbd;
 }
 
 .button-container {
+  text-align: center;
+}
+
+.auth-button {
+  background: transparent;
+  border-radius: 5px;
+  border: 0.25em solid var(--tertiary);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.5em 1em;
+  position: relative;
+  transition: top 50ms;
+}
+.auth-button:hover,
+.auth-button:focus {
+  border-color: var(--royal);
+  top: -1px;
+}
+.auth-button:active {
+  background: var(--blue);
+  border-color: var(--blue);
+  top: 3px;
+}
+
+header {
+  max-width: 1024px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  height: 85px;
+  margin: 0 auto;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+div {
+  display: block;
+}
+
+nav {
+  display: block;
+}
+
+.nav-links a,
+.nav-links button {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--bg);
+  background-color: var(--tertiary);
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links div {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+.main-logo img {
+  height: 2rem;
+}
+
+.social-button {
+}
+.footer{
   text-align: center;
 }
