@@ -3,7 +3,7 @@ import {Container, Heading} from './elements'
 function NotFound() {
   return (
     <Container>
-      <Heading>404, The Page You are Looking for doesn't exists</Heading>
+      <Heading>404, The page you are looking for doesn't exist.</Heading>
     </Container>
   )
 }
