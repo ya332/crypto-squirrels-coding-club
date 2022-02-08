@@ -30,7 +30,9 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
 
                 <div className="jt-container">
                     <div className="jt-image">
+                    <div className='image-container'>
                         <img src="https://ipfs.infura.io/ipfs/QmfVkNR7qUjHxQWWu1kv6hR2xh9hLKJQigfaSXyWDYvqFX" width="150" height="200" alt="Crypto Coding Squirrels Club" />
+                    </div>
                     </div>
                     <div className="jt-content">
                         <h1>Crypto Squirrels Coding Club</h1>
@@ -46,17 +48,18 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                                 </p>
                             </>
                         }
-                        <p>Become a Squirrel 🐿️ -&gt; Crack Big Tech interviews 🚀 (like you would crack a nut 🌰) Are you studying programming to get into Big Tech companies? Do you need a platform to do your mock interviews? Are you looking for people to offer mocks interview to you? Then, **you are in the right place!**</p>
+                        <p>Become a Squirrel 🐿️ -&gt; Crack Big Tech interviews 🚀 (like you would crack a nut 🌰) Are you studying programming to get into Big Tech companies? Do you need a platform to do your mock interviews? Are you looking for people to offer mocks interview to you? Then, <b>you are in the right place!</b></p>
                         <h2>How does the Club work?</h2>
                         <p>By purchasing one of the squirrel NFTs, you become a member of the club for life 🔥and get access to the THE BACKYARD (That's awesome, right!),
                             which is a place where you can hone your coding and programming interviewing skills.
                             THE BACKYARD offers a real-time collaborative coding editor with a support of over 10 programming languages as well as text messaging,
-                            voice and video calling capabilities. Check out a THE BACKYARD in action:
-                            {' '}
+                            voice and video calling capabilities. Check out a THE BACKYARD in action:</p>
+                        <div className='image-container'>
                             <img src="https://bafybeiarccx2xym5yjpjy6wcbmyplzytzgv4uiej3uwpnwcfedq3zww4zi.ipfs.infura-ipfs.io/" width="400" height="200" target="_blank" />
-                            {' '}
+                        </div>
+                        <p>
+                            Members use our Club to do the following:
                         </p>
-                        Members use our Club to do the following:
                         <ol>
                             <li>- Do pair programming with other club members, </li>
                             <li>- Have mock coding interviews,</li>
@@ -133,6 +136,15 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+            <section className="details" id="details">
+                <div className="mbr-container">
+                    <h2>More Details</h2>
+                    <p>Smart Contract Address: <a href="https://explorer.testnet.near.org/accounts/nft-example2.nearorca.testnet" target="_blank"> nft-example2.nearorca.testnet</a></p>
+                    <p>Smart contract is deployed to Near protocol and the NFTs are minted on testnet protocol </p>
+                    <p>Mintbase.io store link: <a href="https://testnet.mintbase.io/store/squirrelcodingclub.mintspace2.testnet/" target="_blank">https://testnet.mintbase.io/store/squirrelcodingclub.mintspace2.testnet/</a></p>
+  
                 </div>
             </section>
 
