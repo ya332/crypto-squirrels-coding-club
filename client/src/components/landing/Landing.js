@@ -83,7 +83,7 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                             </p>
                             <ol>
                                 <li>- Do pair programming with other club members, </li>
-                                <li>- Have mock coding interviews,</li>
+                                <li>- Have mock coding interviews with other club members,</li>
                                 <li>- Have access to a real-time collaborative coding IDE with a support of over 10 programming languages as well as message, voice and video chat capabilities</li>
                                 <li>- Get access to a community of programmers, learners, developers, engineers and crypto enthusiasts.</li>
                                 <li>- and much more...</li>
