@@ -30,7 +30,7 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
         <>
             <div className='root-div'>
                 <header>
-                    <div className='main-logo'><a href={window.location} target="_blank"><img src={mainLogo} /></a></div>
+                    <div className='main-logo'><a href="https://crypto-squirrels-coding-club.herokuapp.com" target="_blank"><img src={mainLogo} /></a></div>
                     <nav className='nav-links'>
                         <div><Link to='/thebackyard'><button>THE BACKYARD</button></Link></div>
                         <div><a href='#roadmap'><button>Roadmap</button></a></div>
@@ -74,7 +74,7 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                             <p>By purchasing one of the squirrel NFTs, you become a member of the club for life 🔥and get access to the THE BACKYARD (That's awesome, right!),
                                 which is a place where you can hone your coding and programming interviewing skills.
                                 THE BACKYARD offers a real-time collaborative coding editor with a support of over 10 programming languages as well as text messaging,
-                                voice and video calling capabilities. Check out a THE BACKYARD in action:</p>
+                                voice and video calling capabilities. Check out THE BACKYARD in action:</p>
                             <div className='image-container'>
                                 <img src="https://bafybeiarccx2xym5yjpjy6wcbmyplzytzgv4uiej3uwpnwcfedq3zww4zi.ipfs.infura-ipfs.io/" width="400" height="200" target="_blank" />
                             </div>
