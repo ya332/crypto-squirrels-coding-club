@@ -30,24 +30,28 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
 
                 <div className="jt-container">
                     <div className="jt-image">
-                    <div className='image-container'>
-                        <img src="https://ipfs.infura.io/ipfs/QmfVkNR7qUjHxQWWu1kv6hR2xh9hLKJQigfaSXyWDYvqFX" width="150" height="200" alt="Crypto Coding Squirrels Club" />
-                    </div>
+                        <div className='image-container'>
+                            <img src="https://ipfs.infura.io/ipfs/QmfVkNR7qUjHxQWWu1kv6hR2xh9hLKJQigfaSXyWDYvqFX" width="150" height="200" alt="Crypto Coding Squirrels Club" />
+                        </div>
                     </div>
                     <div className="jt-content">
                         <h1>Crypto Squirrels Coding Club</h1>
-                        {currentUser
-                            ? <button onClick={signOut}>Log out</button>
-                            : <button onClick={signIn}>Log in</button>
-                        }
-                        {currentUser
-                            ? <p>Signed in and the current user account id is: {currentUser.accountId}</p>
-                            : <>
-                                <p>
-                                    Go ahead and sign in to try it out!
-                                </p>
-                            </>
-                        }
+                        <h2>Login via Connecting Your Wallet</h2>
+                        <div className='button-container'>
+                            {currentUser
+                                ? <button onClick={signOut}>Log out</button>
+                                : <button onClick={signIn}>Log in</button>
+                            }
+                            {currentUser
+                                ? <p>Signed in and the current user account id is: {currentUser.accountId}</p>
+                                : <>
+                                    <p>
+                                        Go ahead and sign in to try it out!
+                                    </p>
+                                </>
+                            }
+                        </div>
+                        <h2>What is Crypto Squirrels Coding Club?</h2>
                         <p>Become a Squirrel 🐿️ -&gt; Crack Big Tech interviews 🚀 (like you would crack a nut 🌰) Are you studying programming to get into Big Tech companies? Do you need a platform to do your mock interviews? Are you looking for people to offer mocks interview to you? Then, <b>you are in the right place!</b></p>
                         <h2>How does the Club work?</h2>
                         <p>By purchasing one of the squirrel NFTs, you become a member of the club for life 🔥and get access to the THE BACKYARD (That's awesome, right!),
@@ -144,7 +148,7 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                     <p>Smart Contract Address: <a href="https://explorer.testnet.near.org/accounts/nft-example2.nearorca.testnet" target="_blank"> nft-example2.nearorca.testnet</a></p>
                     <p>Smart contract is deployed to Near protocol and the NFTs are minted on testnet protocol </p>
                     <p>Mintbase.io store link: <a href="https://testnet.mintbase.io/store/squirrelcodingclub.mintspace2.testnet/" target="_blank">https://testnet.mintbase.io/store/squirrelcodingclub.mintspace2.testnet/</a></p>
-  
+
                 </div>
             </section>
 
