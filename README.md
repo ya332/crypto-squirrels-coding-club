@@ -12,6 +12,8 @@ Roadmap
 - [ ] Allow redirecting to The BACKYARD if the user is logged in and has NFT. 
 - [ ] Create squirrel edition on Mintbase.io
 
+Resource: https://github.com/near/corgis
+
 Quick Start
 ===========
 
