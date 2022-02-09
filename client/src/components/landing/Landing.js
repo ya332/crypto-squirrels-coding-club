@@ -1,17 +1,20 @@
 import 'regenerator-runtime/runtime';
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import PropTypes from 'prop-types';
 import Big from 'big.js';
 import './Landing.scss'
 import mainLogo from '../../assets/main-logo.png';
+import squirrelImage from '../../assets/landing-page.png';
 import { Link } from 'react-router-dom';
 
 const SUGGESTED_DONATION = '0';
 const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
 const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
+    const history = useHistory();
     const [messages, setMessages] = useState([]);
-
+    console.log("currentUser", currentUser, "contract", contract, "wallet", wallet)
     const signIn = () => {
         wallet.requestSignIn(
             { contractId: nearConfig.contractName, methodNames: [contract.addMessage.name] }, //contract requesting access
@@ -26,19 +29,29 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
         window.location.replace(window.location.origin + window.location.pathname);
     };
 
+    const handleBackyardButtonClick = () => {
+        if (currentUser){
+            history.push("/thebackyard");
+        }
+        else { 
+            alert("Only NFT holding members are allowed in THE BACKYARD. Please make a purchase from our Mintbase store(https://testnet.mintbase.io/store/squirrelcodingclub.mintspace2.testnet/) and then come here and connect your wallet")
+        }
+      }
+    
+
     return (
         <>
             <div className='root-div'>
                 <header>
-                    <div className='main-logo'><a href="https://crypto-squirrels-coding-club.herokuapp.com" target="_blank"><img src={mainLogo} /></a></div>
+                    <div className='main-logo'><a href="https://crypto-squirrels-coding-club.herokuapp.com" target="_blank"><img src={mainLogo} alt="Main Logo for Crypto Squirrels Coding Club" /></a></div>
                     <nav className='nav-links'>
-                        <div><Link to='/thebackyard'><button>THE BACKYARD</button></Link></div>
+                        <div><button onClick={handleBackyardButtonClick}>THE BACKYARD</button></div>
                         <div><a href='#roadmap'><button>Roadmap</button></a></div>
                         <div><a href='#more-details'><button>More Details</button></a></div>
                         <div>
                             <a href="https://t.me/CryptoSquirrelsCodingClub" target="_blank" rel="noreferrer">
                                 <button style={{backgroundColor:"white"}}>
-                                    <img height="20px" src="https://cdn-icons-png.flaticon.com/512/906/906377.png" alt="Telegram" />
+                                    <img height="20px" alt="Telegram icon" src="https://cdn-icons-png.flaticon.com/512/906/906377.png" alt="Telegram" />
                                 </button>
                             </a>
                         </div>
@@ -48,7 +61,7 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                     <div className="jt-container">
                         <div className="jt-image">
                             <div className='image-container'>
-                                <img src="https://ipfs.infura.io/ipfs/QmfVkNR7qUjHxQWWu1kv6hR2xh9hLKJQigfaSXyWDYvqFX" width="150" height="200" alt="Crypto Coding Squirrels Club" />
+                                <img src={squirrelImage} width="150" height="200" alt="Crypto Coding Squirrels Club" />
                             </div>
                         </div>
                         <div className="jt-content">
