@@ -6,6 +6,7 @@
   "engines" : { "node" : "14.x" },
   "scripts": {
     "server:dev": "cd server && npm run start:dev && cd ..",
+    "client:dev": "cd client && npm run start && cd ..",
     "build:server": "cd server && npm run build && cd ..",
     "build:client": "cd client && npm run build && cd ..",
     "move:server": "mv ./server/build . && cp ./server/package.json ./build && cd build && npm install && cd ..",

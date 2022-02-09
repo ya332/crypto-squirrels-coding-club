@@ -16,3 +16,5 @@ neardev/dev-account*
 yarn-error.log
 
 build/
+
+.env
