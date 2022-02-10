@@ -1,9 +1,9 @@
 Crypto Squirrels Coding Club 
 ==========
 
-Live at [https://crypto-squirrels-coding-club.herokuapp.com](https://crypto-squirrels-coding-club.herokuapp.com)
-Mintbase Store: https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet
-Submission to NEAR MetaBUILD Hackathon by Yigit Alparslan, (Github handle ya332). 
+Live at [https://crypto-squirrels-coding-club.herokuapp.com](https://crypto-squirrels-coding-club.herokuapp.com) \
+Mintbase Store: https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet \
+Submission to NEAR MetaBUILD Hackathon by Yigit Alparslan, (Github handle ya332). \
 Contact info: alparslanyigitcan@gmail.com
 
 Roadmap
@@ -16,7 +16,7 @@ Roadmap
 - [x] Create squirrel edition on Mintbase.io
 - [x] Add steps to be a member
 
-Resource: https://github.com/near/corgis
+Some useful resources: https://github.com/near/corgis and
 https://mintbase-testnet.hasura.app/api/rest/stores/squirrelcodingclub.mintspace2.testnet
 
 Quick Start
@@ -104,7 +104,7 @@ One command:
 As you can see in `package.json`, this does two things:
 
 1. builds & deploys smart contracts to NEAR TestNet
-2. builds & deploys frontend code to GitHub using [gh-pages]. This will only work if the project already has a repository set up on GitHub. Feel free to modify the `deploy` script in `package.json` to deploy elsewhere.
+2. builds & deploys frontend code to Heroku using `heroku-cli`. Feel free to modify the `deploy` script in `package.json` to deploy elsewhere.
 
 
 
