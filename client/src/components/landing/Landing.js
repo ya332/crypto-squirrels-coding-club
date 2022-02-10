@@ -216,7 +216,7 @@ const Landing = () => {
                                         <h3>60%</h3>
                                     </div>
                                     <div className="goal">
-                                        <h3>🚧 Submission to Near MetaBUILD Hackathon (In progress...)</h3>
+                                        <h3>✔ Submission to Near MetaBUILD Hackathon </h3>
                                         <div>
                                             <p>We enter the Near MetaBUILD Hackathon to compete to win prizes so that we can support growing our community</p>
                                         </div>
