@@ -151,7 +151,7 @@ const Landing = () => {
                                 THE BACKYARD offers a real-time collaborative coding editor with a support of over 10 programming languages as well as text messaging,
                                 voice and video calling capabilities. Check out THE BACKYARD in action:</p>
                             <div className='image-container'>
-                                <img src="https://bafybeiarccx2xym5yjpjy6wcbmyplzytzgv4uiej3uwpnwcfedq3zww4zi.ipfs.infura-ipfs.io/" alt="Squirrel NFT" width="400" height="200" target="_blank" />
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Cb98yLkyink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>
                                 Members use our Club to do the following:
