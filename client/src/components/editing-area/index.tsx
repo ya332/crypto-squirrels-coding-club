@@ -19,7 +19,7 @@ function Main() {
 
   const [user] = useAuth()
   const [activeUsers, setActiveUsers] = useState<ActiveUsers[]>([])
-  const [id] = useState(() => location.pathname.replace('/task/', ''))
+  const [id] = useState(() => location.pathname.replace('/thebackyard/', ''))
   const [tab, setTab] = useState<'EDITOR' | 'RESULT'>('EDITOR')
   const [loading, setLoading] = useState(false)
   const [code, setCode] = useState('')

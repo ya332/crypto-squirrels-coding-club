@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { useWallet } from '../../store/walletContext';
 import { login, signup } from '../../utils/api/auth';
 import { useAuth } from '../../store/authContext';
+import {verifyOwnership} from '../../utils/verify-ownership';
 
 const SUGGESTED_DONATION = '0';
 const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
@@ -21,6 +22,7 @@ const Landing = () => {
     const [ownedTokenCount, setOwnedTokenCount] = useState(0);
     const [ownedTokens, setOwnedTokens] = useState([]);
     const { wallet, isConnected, details } = useWallet();
+    const [isMember, setIsMember] = useState(false);
  
     useEffect(() => {
         const fetchData = async () => {
@@ -30,6 +32,9 @@ const Landing = () => {
             console.log(data.token);
             setOwnedTokenCount(data.token.length);
             setOwnedTokens(data.token);
+            let isCurrentUserClubMember = await verifyOwnership(data.token);
+            console.log("isCurrentUserClubMember", isCurrentUserClubMember)
+            setIsMember(isCurrentUserClubMember);
         }
         if (details) fetchData().catch((err) => console.log(err));
     }, [details])
@@ -85,7 +90,7 @@ const Landing = () => {
     console.log("wallet", wallet, "isConnected", isConnected, "details", details)
 
     const handleBackyardButtonClick = () => {
-        if (isConnected) {
+        if (isMember) {
             history.push("/thebackyard");
         }
         else {
