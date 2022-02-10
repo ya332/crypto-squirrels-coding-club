@@ -16,7 +16,6 @@ export function initializeSocketServer(server: httpServer) {
 
   io.on(event.CONNECTION, (socket: Socket) => {
     socket.on(event.JOIN_ROOM, data => {
-      console.log('event.JOIN_ROOM roomId', data.roomId)
       socket.join(data.roomId)
       socketData[socket.id] = data.roomId
 
@@ -24,7 +23,6 @@ export function initializeSocketServer(server: httpServer) {
         var _found = roomData[data.roomId].filter(
           (item: any) => item.socketId === socket.id,
         )
-        console.log('_found', _found)
         if (!_found || _found.length === 0) {
           roomData[data.roomId] = [
             ...roomData[data.roomId],
@@ -36,14 +34,6 @@ export function initializeSocketServer(server: httpServer) {
       }
 
       io.in(socketData[socket.id]).emit(event.UPDATED_USERS, roomData[data.roomId])
-      console.log(
-        'inside event.connection',
-        'socketData',
-        socketData,
-        'roomData',
-        roomData,
-      )
-
     })
 
     socket.on(event.READY_FOR_VIDEO_CALL, data => {
@@ -51,7 +41,6 @@ export function initializeSocketServer(server: httpServer) {
       const usersInThisRoom = roomData[data.roomId].filter(
         (element: any) => element.socketId !== socket.id,
       )
-      console.log("usersInThisRoom", usersInThisRoom);
       socket.emit('all users', usersInThisRoom)
     });
 

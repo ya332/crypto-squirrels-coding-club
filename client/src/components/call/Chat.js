@@ -34,7 +34,6 @@ const Chat = () => {
     const sendMessage = (e) => {
         if (e.key === 'Enter') {
             const currentMessage = e.target.value;
-            console.log("currentMessage", currentMessage);
             if (currentMessage) {
                 socket.emit(event.BE_SEND_MESSAGE, { roomId, msg: currentMessage, sender: currentUser.username });
                 inputRef.current.value = '';

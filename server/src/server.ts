@@ -31,7 +31,6 @@ if (NODE_ENV === "production") {
   });
 } else {
   app.use(express.static(path.join(path.resolve(__dirname, '../../client/public'))));
-  console.log(path.resolve(__dirname, '../../client/index.html'));
   app.get('*', (_, res) => {
     res.sendFile(path.join(path.resolve(__dirname, '../../client/public/index.html')));
   });

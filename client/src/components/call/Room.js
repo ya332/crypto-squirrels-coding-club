@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import io from "socket.io-client";
 import Peer from "simple-peer";
 import styled from "styled-components";
 import micmute from "../../assets/micmute.svg";
 import micunmute from "../../assets/micunmute.svg";
 import webcam from "../../assets/webcam.svg";
 import webcamoff from "../../assets/webcamoff.svg";
-import placeholder from "../../assets/placeholder_profile_picture.png";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../store/authContext";
 import socket from "../../utils/socket";
@@ -63,18 +61,6 @@ const StyledVideo = styled.video`
     margin-bottom:3vh;
 `;
 
-const Placeholder = styled.img`
-    width: 250px;
-    position: absolute;
-    right: 0px;
-    bottom:50px;
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 1px;
-    border: 5px solid gray;
-`;
-
-
 const Video = (props) => {
     const ref = useRef();
 
@@ -96,7 +82,6 @@ const Room = () => {
     const [user] = useAuth();
     const peersRef = useRef([]);
     const { roomId } = useParams();
-    console.log("roomId inside Room.js", roomId)
     const videoConstraints = {
         minAspectRatio: 1.333,
         minFrameRate: 60,
@@ -117,7 +102,6 @@ const Room = () => {
 
                 (e || window.event).returnValue = confirmationMessage; //Gecko + IE
 
-                console.log("logout !");
                 return confirmationMessage; //Webkit, Safari, Chrome
 
             });
@@ -130,15 +114,11 @@ const Room = () => {
         navigator.mediaDevices
             .getUserMedia({ video: videoConstraints, audio: true })
             .then((stream) => {
-                console.log("then")
                 userVideo.current.srcObject = stream;
                 socket.emit(event.READY_FOR_VIDEO_CALL, { roomId: roomId, username: user.username });
                 socket.on("all users", (users) => {
-                    console.log("all users", users)
                     const newPeers = [];
                     users.forEach((element) => {
-                        console.log("element", element)
-                        console.log('forEAch element.socketId', element.socketId)
                         const peer = createPeer(element.socketId, socket.id, stream);
                         peersRef.current.push({
                             peerID: element.socketId,
@@ -149,11 +129,9 @@ const Room = () => {
                             peer,
                         });
                     });
-                    console.log("newPeers", newPeers)
                     setPeers(newPeers);
                 });
                 socket.on("user joined", (payload) => {
-                    console.log("==", payload)
                     const peer = addPeer(payload.signal, payload.callerID, stream);
                     peersRef.current.push({
                         peerID: payload.callerID,
@@ -167,9 +145,6 @@ const Room = () => {
                 });
 
                 socket.on(event.DISCONNECTION, (id) => {
-                    console.log("Room.js id", id)
-                    console.log("peersRef.current", peersRef.current)
-                    console.log("before disconnection", peers);
                     const peerObj = peersRef.current.find((p) => p.peerID === id);
                     if (peerObj) {
                         peerObj.peer.destroy();
@@ -177,7 +152,6 @@ const Room = () => {
                     const updatedPeers = peersRef.current.filter((p) => p.peerID !== id);
                     peersRef.current = updatedPeers;
                     setPeers(updatedPeers);
-                    console.log("after disconnection", peers);
                 });
 
                 socket.on("receiving returned signal", (payload) => {
@@ -303,7 +277,6 @@ const Room = () => {
                 />
             </Controls>
             {peers.map((peer, index) => {
-                console.log("Inside peers map", peer)
                 let audioFlagTemp = true;
                 let videoFlagTemp = true;
                 if (userUpdate) {

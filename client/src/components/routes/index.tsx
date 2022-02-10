@@ -4,7 +4,7 @@ import {useWallet} from '../../store/walletContext'
 type Props = {component: any}
 
 export function PrivateRoute({component: Component, ...other}: Props & RouteProps) {
-  const { wallet, isConnected, details } = useWallet();
+  const { isConnected } = useWallet();
 
   return (
     <Route
@@ -15,7 +15,7 @@ export function PrivateRoute({component: Component, ...other}: Props & RouteProp
 }
 
 export function UnauthRoute({component: Component, ...other}: Props & RouteProps) {
-  const { wallet, isConnected, details } = useWallet();
+  const { isConnected } = useWallet();
 
   return (
     <Route

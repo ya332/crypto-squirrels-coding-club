@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { PrivateRoute, UnauthRoute } from './components/routes'
@@ -9,12 +9,9 @@ import { AuthProvider } from './store/authContext'
 import { WalletProvider } from './store/walletContext';
 import Landing from './components/landing/Landing'
 import {
-  LoginPage,
   MainPage,
   NotFoundPage,
-  SignupPage,
   TaskPage,
-  Oauth2Page,
 } from './pages'
 
 import 'react-toastify/dist/ReactToastify.css'

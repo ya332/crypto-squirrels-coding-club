@@ -1,24 +1,17 @@
 import 'regenerator-runtime/runtime';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import PropTypes from 'prop-types';
-import Big from 'big.js';
 import './Landing.scss'
 import mainLogo from '../../assets/main-logo.png';
 import squirrelImage from '../../assets/landing-page.png';
-import { Link } from 'react-router-dom';
 import { useWallet } from '../../store/walletContext';
 import { login, signup } from '../../utils/api/auth';
 import { useAuth } from '../../store/authContext';
 import {verifyOwnership} from '../../utils/verify-ownership';
 
-const SUGGESTED_DONATION = '0';
-const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
-
 const Landing = () => {
     const [, setUser] = useAuth()
     const history = useHistory();
-    const [accountDetails, setAccountDetails] = useState();
     const [ownedTokenCount, setOwnedTokenCount] = useState(0);
     const [ownedTokens, setOwnedTokens] = useState([]);
     const { wallet, isConnected, details } = useWallet();
@@ -29,11 +22,9 @@ const Landing = () => {
             const response = await fetch(`https://mintbase-testnet.hasura.app/api/rest/accounts/${details.accountId}`);
             // convert the data to json
             const data = await response.json();
-            console.log(data.token);
             setOwnedTokenCount(data.token.length);
             setOwnedTokens(data.token);
             let isCurrentUserClubMember = await verifyOwnership(data.token);
-            console.log("isCurrentUserClubMember", isCurrentUserClubMember)
             setIsMember(isCurrentUserClubMember);
         }
         if (details) fetchData().catch((err) => console.log(err));
@@ -59,7 +50,6 @@ const Landing = () => {
   
         try {
             let user = await signup(data)
-            console.log("user signedUp", user)
             if (typeof user === 'string') {
             }
         }
@@ -69,7 +59,6 @@ const Landing = () => {
         if (typeof loggedInUser === 'string') {
           return
         }
-        console.log("user loggedIn", loggedInUser)
         setUser(loggedInUser);
       }
       
@@ -86,8 +75,6 @@ const Landing = () => {
         }
     }
 
-
-    console.log("wallet", wallet, "isConnected", isConnected, "details", details)
 
     const handleBackyardButtonClick = () => {
         if (isMember) {
@@ -142,8 +129,7 @@ const Landing = () => {
                                 }> {isConnected ? 'Disconnect' : 'Connect'}</button>
                                 {isConnected
                                     ? <><p>Signed in and the current user account id is: {details.accountId}.</p>
-                                        <p>{accountDetails}</p>
-                                        {ownedTokens.length > 0 && <p> You own {ownedTokenCount} tokens. Your tokens are {JSON.stringify(ownedTokens)}</p>}
+                                        {ownedTokens.length > 0 && <p> You own {ownedTokenCount} token(s). Your tokens are {JSON.stringify(ownedTokens)}</p>}
                                     </>
                                     : <>
                                         <p>
@@ -155,14 +141,14 @@ const Landing = () => {
                             <h2>What is Crypto Squirrels Coding Club?</h2>
                             <p>Become a Squirrel 🐿️ -&gt; Crack Big Tech interviews 🚀 (like you would crack a nut 🌰) Are you studying programming to get into Big Tech companies? Do you need a platform to do your mock interviews? Are you looking for people to offer mocks interview to you? Then, <b>you are in the right place!</b></p>
                             <h2> How to be a member?</h2>
-                            <p>All Club NFTs are on the NEAR testnet blockchain. Buying will require NEAR tokens, but testnet doesn't have real funds and you start with 200 Ⓝ to play around! More info <a href="https://docs.near.org/docs/develop/basics/create-account#creating-a-testnet-account" target="_blank"  rel="noreferrer">here</a></p>
+                            <p>All Club NFTs are on the NEAR testnet blockchain. Buying will require NEAR tokens, but testnet doesn't have real funds and you start with 200 Ⓝ to play around! More info <a href="https://docs.near.org/docs/develop/basics/create-account#creating-a-testnet-account" target="_blank" rel="noopener" rel="noreferrer">here</a></p>
                               <ol>
                                 <li>Create a NEAR wallet on testnet blockchain <a href="https://wallet.testnet.near.org/create" target="_blank" rel="noreferrer">https://wallet.testnet.near.org/create</a> </li>
                                 <li>Go to our Mintbase store <a href="https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet" >https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet</a> and buy one of our club NFTs. </li>
                                 <li>Only 11 NFTs are minted so far, but more will come and you will see availability such as "3/10 Available" when there are cards available to purchase </li>
                                 <li>Come back to this <a href='https://crypto-squirrels-coding-club.herokuapp.com/'  target="_blank" rel="noreferrer">site</a> and connect your account by clicking "Connect"</li>
                                 <li>Site will tell you tokens you own. If the unique token id of your token matches one of NFTs in our squirrel collection, you can click on the "THE BACKYARD' button to go inside.</li>
-                                <li>Some users bought wrong token and tried to get in. You need to buy one of the NFTs minted via this smart contract: <a href='https://explorer.testnet.near.org/accounts/cryptosquirrelsclub.mintspace2.testnet' target="_blank" rel="noreferrer">https://explorer.testnet.near.org/accounts/cryptosquirrelsclub.mintspace2.testnet.</a>In other words, your token_id needs to appear in one of the ids here: <a href='https://mintbase-testnet.hasura.app/api/rest/stores/cryptosquirrelsclub.mintspace2.testnet' target="_blank" >https://mintbase-testnet.hasura.app/api/rest/stores/cryptosquirrelsclub.mintspace2.testnet</a></li>
+                                <li>Some users bought wrong token and tried to get in. You need to buy one of the NFTs minted via this smart contract: <a href='https://explorer.testnet.near.org/accounts/cryptosquirrelsclub.mintspace2.testnet' target="_blank" rel="noreferrer">https://explorer.testnet.near.org/accounts/cryptosquirrelsclub.mintspace2.testnet.</a>In other words, your token_id needs to appear in one of the ids here: <a href='https://mintbase-testnet.hasura.app/api/rest/stores/cryptosquirrelsclub.mintspace2.testnet' target="_blank" rel="noreferrer">https://mintbase-testnet.hasura.app/api/rest/stores/cryptosquirrelsclub.mintspace2.testnet</a></li>
                             </ol>
                             <h2>How does the Club work?</h2>
                             <p>By purchasing one of the squirrel NFTs, you become a member of the club for life 🔥and get access to the THE BACKYARD (That's awesome, right!),
@@ -170,7 +156,7 @@ const Landing = () => {
                                 THE BACKYARD offers a real-time collaborative coding editor with a support of over 10 programming languages as well as text messaging,
                                 voice and video calling capabilities. Check out THE BACKYARD in action:</p>
                             <div className='image-container'>
-                                <img src="https://bafybeiarccx2xym5yjpjy6wcbmyplzytzgv4uiej3uwpnwcfedq3zww4zi.ipfs.infura-ipfs.io/" width="400" height="200" target="_blank" />
+                                <img src="https://bafybeiarccx2xym5yjpjy6wcbmyplzytzgv4uiej3uwpnwcfedq3zww4zi.ipfs.infura-ipfs.io/" alt="Squirrel NFT" width="400" height="200" target="_blank" />
                             </div>
                             <p>
                                 Members use our Club to do the following:
