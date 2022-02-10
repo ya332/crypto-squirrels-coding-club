@@ -52,3 +52,13 @@ export async function signup(data: SignupCredentials) {
     return response.data.message
   }
 }
+
+
+export async function persist(data: SignupCredentials) {
+  const response = await httpService.post('/user/persist', data)
+  console.log("inside persist", response.data)
+  if (response.data.status === 'Success') {
+    return response.data.user
+  } 
+  return `User can't be saved due to a technical error. Please refresh and try again. Reason: ${response.data.message}`
+}

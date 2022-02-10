@@ -199,21 +199,6 @@ const Room = () => {
         return peer;
     }
 
-    const handleVisibilityForVideo = () => {
-        if (videoFlag) {
-            return "block"
-        } else {
-            return "none"
-        }
-    }
-
-    const handleVisibilityForPlaceholder = () => {
-        if (videoFlag) {
-            return "none"
-        } else {
-            return "block"
-        }
-    }
     return (
         <Container>
             <StyledVideo muted ref={userVideo} autoPlay playsInline />

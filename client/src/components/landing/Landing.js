@@ -5,18 +5,18 @@ import './Landing.scss'
 import mainLogo from '../../assets/main-logo.png';
 import squirrelImage from '../../assets/landing-page.png';
 import { useWallet } from '../../store/walletContext';
-import { login, signup } from '../../utils/api/auth';
+import { persist } from '../../utils/api/auth';
 import { useAuth } from '../../store/authContext';
-import {verifyOwnership} from '../../utils/verify-ownership';
+import { verifyOwnership } from '../../utils/verify-ownership';
 
 const Landing = () => {
-    const [, setUser] = useAuth()
+    const [user, setUser] = useAuth()
     const history = useHistory();
     const [ownedTokenCount, setOwnedTokenCount] = useState(0);
     const [ownedTokens, setOwnedTokens] = useState([]);
     const { wallet, isConnected, details } = useWallet();
     const [isMember, setIsMember] = useState(false);
- 
+
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch(`https://mintbase-testnet.hasura.app/api/rest/accounts/${details.accountId}`);
@@ -26,45 +26,42 @@ const Landing = () => {
             setOwnedTokens(data.token);
             let isCurrentUserClubMember = await verifyOwnership(data.token);
             setIsMember(isCurrentUserClubMember);
+            localStorage.setItem('isMember', isCurrentUserClubMember);
         }
-        if (details) fetchData().catch((err) => console.log(err));
-    }, [details])
+
+        const handleUserAuth = async () => {
+
+            // We rely on wallet integration to login/logout. 
+            // However, creating a task, viewing a task etc stil relies on old username/password. 
+            // So, once we get accountId after wallet integration, we immediately signup and login the user 
+            // be backwards compatible with the previous endpoints.
 
 
-    useEffect(() => {
-      const handleUserAuth = async () => {
-  
-        // We rely on wallet integration to login/logout. 
-        // However, creating a taskm viewing a task etc stil relies on old username/password. 
-        // So, once we get accountId after wallet integration, we immediately signup and login the user 
-        // be backwards compatible with the previous endpoints.
-  
-
-        let data = {
-          firstName: details.accountId,
-          lastName: details.accountId,
-          username: details.accountId,
-          email: "no-reply@crypto-squirrels-coding-club.herokuapp.com",
-          password: details.accountId
-        }
-  
-        try {
-            let user = await signup(data)
-            if (typeof user === 'string') {
+            let data = {
+                firstName: details.accountId,
+                lastName: details.accountId,
+                username: details.accountId,
+                email: "no-reply@crypto-squirrels-coding-club.herokuapp.com",
+                password: details.accountId
             }
+
+            try {
+                let savedAndPersistedUser = await persist(data)
+                setUser(savedAndPersistedUser);
+                console.log("savedAndPersistedUser", savedAndPersistedUser)
+                localStorage.setItem('user', JSON.stringify(savedAndPersistedUser))
+                console.log("localStorage.getItem('user')", localStorage.getItem('user'));
+                console.log("localStorage.getItem('isMember')", localStorage.getItem('isMember'));
+
+            }
+            catch (e) { console.log("Error during signin up user", e) };
+
         }
-        catch (e) {console.log("Error during signin up user", e)};
-  
-        const loggedInUser = await login({ id: details.accountId, password: details.accountId })
-        if (typeof loggedInUser === 'string') {
-          return
-        }
-        setUser(loggedInUser);
-        console.log("localStorage.getItem('user')", localStorage.getItem('user'));
-      }
-      
-      if (details) handleUserAuth().catch((err) => console.log(err));
-    }, [details, isConnected])
+        console.log("details", details)
+        if (details) fetchData().then(() => { handleUserAuth().catch((err) => console.log(err)); }).catch((err) => console.log(err));
+
+    }, [details, isMember])
+
 
     const onConnectButtonClick = () => {
         if (isConnected) {
@@ -97,7 +94,7 @@ const Landing = () => {
                         <div>
                             <a href="https://t.me/CryptoSquirrelsCodingClub" target="_blank" rel="noreferrer">
                                 <button style={{ backgroundColor: "white" }}>
-                                    <img height="20px" alt="Telegram icon" src="https://cdn-icons-png.flaticon.com/512/906/906377.png" alt="Telegram" />
+                                    <img height="20px" alt="Telegram icon" src="https://cdn-icons-png.flaticon.com/512/906/906377.png" />
                                 </button>
                             </a>
                         </div>
@@ -142,12 +139,12 @@ const Landing = () => {
                             <h2>What is Crypto Squirrels Coding Club?</h2>
                             <p>Become a Squirrel 🐿️ -&gt; Crack Big Tech interviews 🚀 (like you would crack a nut 🌰) Are you studying programming to get into Big Tech companies? Do you need a platform to do your mock interviews? Are you looking for people to offer mocks interview to you? Then, <b>you are in the right place! We combined the state-of-art NEAR blockchain layer with a coding mock interview solution to create an exclusive community. We are like Bored Ape Yacht Club but our members get access to our club's collaborative coding editor and use it do do mock coding interviews and get better at tech interviews.</b></p>
                             <h2> How to be a member?</h2>
-                            <p>All Club NFTs are on the NEAR testnet blockchain. Buying will require NEAR tokens, but testnet doesn't have real funds and you start with 200 Ⓝ to play around! More info <a href="https://docs.near.org/docs/develop/basics/create-account#creating-a-testnet-account" target="_blank" rel="noopener" rel="noreferrer">here</a></p>
-                              <ol>
+                            <p>All Club NFTs are on the NEAR testnet blockchain. Buying will require NEAR tokens, but testnet doesn't have real funds and you start with 200 Ⓝ to play around! More info <a href="https://docs.near.org/docs/develop/basics/create-account#creating-a-testnet-account" target="_blank" rel="noreferrer">here</a></p>
+                            <ol>
                                 <li>Create a NEAR wallet on testnet blockchain <a href="https://wallet.testnet.near.org/create" target="_blank" rel="noreferrer">https://wallet.testnet.near.org/create</a> </li>
                                 <li>Go to our Mintbase store <a href="https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet" >https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet</a> and buy one of our club NFTs. </li>
                                 <li>Only 11 NFTs are minted so far, but more will come and you will see availability such as "3/10 Available" when there are cards available to purchase </li>
-                                <li>Come back to this <a href='https://crypto-squirrels-coding-club.herokuapp.com/'  target="_blank" rel="noreferrer">site</a> and connect your account by clicking "Connect"</li>
+                                <li>Come back to this <a href='https://crypto-squirrels-coding-club.herokuapp.com/' target="_blank" rel="noreferrer">site</a> and connect your account by clicking "Connect"</li>
                                 <li>Site will tell you tokens you own. If the unique token id of your token matches one of NFTs in our squirrel collection, you can click on the "THE BACKYARD' button to go inside.</li>
                                 <li>Some users bought wrong token and tried to get in. You need to buy one of the NFTs minted via this smart contract: <a href='https://explorer.testnet.near.org/accounts/cryptosquirrelsclub.mintspace2.testnet' target="_blank" rel="noreferrer">https://explorer.testnet.near.org/accounts/cryptosquirrelsclub.mintspace2.testnet.</a>In other words, your token_id needs to appear in one of the ids here: <a href='https://mintbase-testnet.hasura.app/api/rest/stores/cryptosquirrelsclub.mintspace2.testnet' target="_blank" rel="noreferrer">https://mintbase-testnet.hasura.app/api/rest/stores/cryptosquirrelsclub.mintspace2.testnet</a></li>
                             </ol>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import { PrivateRoute, UnauthRoute } from './components/routes'
+import { PrivateRoute } from './components/routes'
 import GlobalStyles from './utils/global-styles'
 import { darkTheme, lightTheme } from './utils/theme'
 import { useTheme } from './store/themeContext'

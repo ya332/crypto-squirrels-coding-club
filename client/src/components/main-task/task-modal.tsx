@@ -4,13 +4,13 @@ import {toast, ToastContainer} from 'react-toastify'
 import {Button, Input, Loader} from '../elements'
 import {ModalWrapper} from './elements'
 import {createTask} from '../../utils/api/task'
-
+import { useHistory } from 'react-router-dom'
 import 'react-pure-modal/dist/react-pure-modal.min.css'
 
 function Modal({isOpen, onClose}: Props) {
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState({name: '', thumbnailUrl: ''})
-
+  const history = useHistory();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -19,9 +19,8 @@ function Modal({isOpen, onClose}: Props) {
 
     if (error) toast.error(error)
 
-    document.location.assign('/thebackyard')
+    history.push('/thebackyard')
   }
-
   return (
     <ModalWrapper>
       {loading && <Loader />}
