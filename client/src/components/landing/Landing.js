@@ -60,6 +60,7 @@ const Landing = () => {
           return
         }
         setUser(loggedInUser);
+        console.log("localStorage.getItem('user')", localStorage.getItem('user'));
       }
       
       if (details) handleUserAuth().catch((err) => console.log(err));
@@ -139,7 +140,7 @@ const Landing = () => {
                                 }
                             </div>
                             <h2>What is Crypto Squirrels Coding Club?</h2>
-                            <p>Become a Squirrel 🐿️ -&gt; Crack Big Tech interviews 🚀 (like you would crack a nut 🌰) Are you studying programming to get into Big Tech companies? Do you need a platform to do your mock interviews? Are you looking for people to offer mocks interview to you? Then, <b>you are in the right place!</b></p>
+                            <p>Become a Squirrel 🐿️ -&gt; Crack Big Tech interviews 🚀 (like you would crack a nut 🌰) Are you studying programming to get into Big Tech companies? Do you need a platform to do your mock interviews? Are you looking for people to offer mocks interview to you? Then, <b>you are in the right place! We combined the state-of-art NEAR blockchain layer with a coding mock interview solution to create an exclusive community. We are like Bored Ape Yacht Club but our members get access to our club's collaborative coding editor and use it do do mock coding interviews and get better at tech interviews.</b></p>
                             <h2> How to be a member?</h2>
                             <p>All Club NFTs are on the NEAR testnet blockchain. Buying will require NEAR tokens, but testnet doesn't have real funds and you start with 200 Ⓝ to play around! More info <a href="https://docs.near.org/docs/develop/basics/create-account#creating-a-testnet-account" target="_blank" rel="noopener" rel="noreferrer">here</a></p>
                               <ol>
