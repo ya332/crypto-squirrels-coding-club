@@ -7,53 +7,110 @@ import './Landing.scss'
 import mainLogo from '../../assets/main-logo.png';
 import squirrelImage from '../../assets/landing-page.png';
 import { Link } from 'react-router-dom';
+import { useWallet } from '../../store/walletContext';
+import { login, signup } from '../../utils/api/auth';
+import { useAuth } from '../../store/authContext';
 
 const SUGGESTED_DONATION = '0';
 const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
-const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
+const Landing = () => {
+    const [, setUser] = useAuth()
     const history = useHistory();
-    const [messages, setMessages] = useState([]);
-    console.log("currentUser", currentUser, "contract", contract, "wallet", wallet)
-    const signIn = () => {
-        wallet.requestSignIn(
-            { contractId: nearConfig.contractName, methodNames: [contract.addMessage.name] }, //contract requesting access
-            'NEAR Guest Book', //optional name
-            null, //optional URL to redirect to if the sign in was successful
-            null //optional URL to redirect to if the sign in was NOT successful
-        );
-    };
+    const [accountDetails, setAccountDetails] = useState();
+    const [ownedTokenCount, setOwnedTokenCount] = useState(0);
+    const [ownedTokens, setOwnedTokens] = useState([]);
+    const { wallet, isConnected, details } = useWallet();
+ 
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`https://mintbase-testnet.hasura.app/api/rest/accounts/${details.accountId}`);
+            // convert the data to json
+            const data = await response.json();
+            console.log(data.token);
+            setOwnedTokenCount(data.token.length);
+            setOwnedTokens(data.token);
+        }
+        if (details) fetchData().catch((err) => console.log(err));
+    }, [details])
 
-    const signOut = () => {
-        wallet.signOut();
-        window.location.replace(window.location.origin + window.location.pathname);
-    };
+
+    useEffect(() => {
+      const handleUserAuth = async () => {
+  
+        // We rely on wallet integration to login/logout. 
+        // However, creating a taskm viewing a task etc stil relies on old username/password. 
+        // So, once we get accountId after wallet integration, we immediately signup and login the user 
+        // be backwards compatible with the previous endpoints.
+  
+
+        let data = {
+          firstName: details.accountId,
+          lastName: details.accountId,
+          username: details.accountId,
+          email: "no-reply@crypto-squirrels-coding-club.herokuapp.com",
+          password: details.accountId
+        }
+  
+        try {
+            let user = await signup(data)
+            console.log("user signedUp", user)
+            if (typeof user === 'string') {
+            }
+        }
+        catch (e) {console.log("Error during signin up user", e)};
+  
+        const loggedInUser = await login({ id: details.accountId, password: details.accountId })
+        if (typeof loggedInUser === 'string') {
+          return
+        }
+        console.log("user loggedIn", loggedInUser)
+        setUser(loggedInUser);
+      }
+      
+      if (details) handleUserAuth().catch((err) => console.log(err));
+    }, [details, isConnected])
+
+    const onConnectButtonClick = () => {
+        if (isConnected) {
+            wallet?.disconnect()
+            window.location.reload()
+        }
+        else {
+            wallet?.connect({ requestSignIn: true })
+        }
+    }
+
+
+    console.log("wallet", wallet, "isConnected", isConnected, "details", details)
 
     const handleBackyardButtonClick = () => {
-        if (currentUser){
+        if (isConnected) {
             history.push("/thebackyard");
         }
-        else { 
-            alert("Only NFT holding members are allowed in THE BACKYARD. Please make a purchase from our Mintbase store(https://testnet.mintbase.io/store/squirrelcodingclub.mintspace2.testnet/) and then come here and connect your wallet")
+        else {
+            alert("Only NFT holding members are allowed in THE BACKYARD. Please make a purchase from our Mintbase store(https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet/) and then come here and connect your wallet")
         }
-      }
-    
+    }
 
     return (
         <>
             <div className='root-div'>
                 <header>
-                    <div className='main-logo'><a href="https://crypto-squirrels-coding-club.herokuapp.com" target="_blank"><img src={mainLogo} alt="Main Logo for Crypto Squirrels Coding Club" /></a></div>
+                    <div className='main-logo'><a href="https://crypto-squirrels-coding-club.herokuapp.com" target="_blank" rel="noreferrer"><img src={mainLogo} alt="Main Logo for Crypto Squirrels Coding Club" /></a></div>
                     <nav className='nav-links'>
                         <div><button onClick={handleBackyardButtonClick}>THE BACKYARD</button></div>
-                        <div><a href='#roadmap'><button>Roadmap</button></a></div>
-                        <div><a href='#more-details'><button>More Details</button></a></div>
+                        <div><a href='https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet' target="_blank" rel="noreferrer"><button>Our Mintbase Store</button></a></div>
                         <div>
                             <a href="https://t.me/CryptoSquirrelsCodingClub" target="_blank" rel="noreferrer">
-                                <button style={{backgroundColor:"white"}}>
+                                <button style={{ backgroundColor: "white" }}>
                                     <img height="20px" alt="Telegram icon" src="https://cdn-icons-png.flaticon.com/512/906/906377.png" alt="Telegram" />
                                 </button>
                             </a>
+                        </div>
+                        <div className='button-container'>
+                            <button className="auth-button" onClick={onConnectButtonClick}> {isConnected ? 'Disconnect' : 'Connect'}</button>
+
                         </div>
                     </nav>
                 </header>
@@ -68,12 +125,21 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                             <h1>Crypto Squirrels Coding Club</h1>
                             <h2>Login via Connecting Your NEAR Wallet</h2>
                             <div className='button-container'>
-                                {currentUser
-                                    ? <button className="auth-button" onClick={signOut}>Log out</button>
-                                    : <button className="auth-button" onClick={signIn}>Log in</button>
-                                }
-                                {currentUser
-                                    ? <p>Signed in and the current user account id is: {currentUser.accountId}</p>
+                                <button className="auth-button" onClick={
+                                    isConnected
+                                        ? () => {
+                                            wallet?.disconnect()
+                                            window.location.reload()
+                                        }
+                                        : () => {
+                                            wallet?.connect({ requestSignIn: true })
+                                        }
+                                }> {isConnected ? 'Disconnect' : 'Connect'}</button>
+                                {isConnected
+                                    ? <><p>Signed in and the current user account id is: {details.accountId}.</p>
+                                        <p>{accountDetails}</p>
+                                        {ownedTokens.length > 0 && <p> You own {ownedTokenCount} tokens. Your tokens are {JSON.stringify(ownedTokens)}</p>}
+                                    </>
                                     : <>
                                         <p>
                                             Go ahead and sign in to try it out!
@@ -83,6 +149,16 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                             </div>
                             <h2>What is Crypto Squirrels Coding Club?</h2>
                             <p>Become a Squirrel 🐿️ -&gt; Crack Big Tech interviews 🚀 (like you would crack a nut 🌰) Are you studying programming to get into Big Tech companies? Do you need a platform to do your mock interviews? Are you looking for people to offer mocks interview to you? Then, <b>you are in the right place!</b></p>
+                            <h2> How to be a member?</h2>
+                            <p>All Club NFTs are on the NEAR testnet blockchain. Buying will require NEAR tokens, but testnet doesn't have real funds and you start with 200 Ⓝ to play around! More info <a href="https://docs.near.org/docs/develop/basics/create-account#creating-a-testnet-account" target="_blank"  rel="noreferrer">here</a></p>
+                              <ol>
+                                <li>Create a NEAR wallet on testnet blockchain <a href="https://wallet.testnet.near.org/create" target="_blank" rel="noreferrer">https://wallet.testnet.near.org/create</a> </li>
+                                <li>Go to our Mintbase store <a href="https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet" >https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet</a> and buy one of our club NFTs. </li>
+                                <li>Only 11 NFTs are minted so far, but more will come and you will see availability such as "3/10 Available" when there are cards available to purchase </li>
+                                <li>Come back to this <a href='https://crypto-squirrels-coding-club.herokuapp.com/'  target="_blank" rel="noreferrer">site</a> and connect your account by clicking "Connect"</li>
+                                <li>Site will tell you tokens you own. If the unique token id of your token matches one of NFTs in our squirrel collection, you can click on the "THE BACKYARD' button to go inside.</li>
+                                <li>Some users bought wrong token and tried to get in. You need to buy one of the NFTs minted via this smart contract: <a href='https://explorer.testnet.near.org/accounts/cryptosquirrelsclub.mintspace2.testnet' target="_blank" rel="noreferrer">https://explorer.testnet.near.org/accounts/cryptosquirrelsclub.mintspace2.testnet.</a>In other words, your token_id needs to appear in one of the ids here: <a href='https://mintbase-testnet.hasura.app/api/rest/stores/cryptosquirrelsclub.mintspace2.testnet' target="_blank" >https://mintbase-testnet.hasura.app/api/rest/stores/cryptosquirrelsclub.mintspace2.testnet</a></li>
+                            </ol>
                             <h2>How does the Club work?</h2>
                             <p>By purchasing one of the squirrel NFTs, you become a member of the club for life 🔥and get access to the THE BACKYARD (That's awesome, right!),
                                 which is a place where you can hone your coding and programming interviewing skills.
@@ -175,9 +251,9 @@ const Landing = ({ contract, currentUser, nearConfig, wallet }) => {
                 <section className="details" id="more-details">
                     <div className="mbr-container">
                         <h2>More Details</h2>
-                        <p>Smart Contract Address: <a href="https://explorer.testnet.near.org/accounts/nft-example2.nearorca.testnet" target="_blank"> nft-example2.nearorca.testnet</a></p>
-                        <p>Smart contract is deployed to Near protocol and the NFTs are minted on testnet protocol </p>
-                        <p>Mintbase.io store link: <a href="https://testnet.mintbase.io/store/squirrelcodingclub.mintspace2.testnet/" target="_blank">https://testnet.mintbase.io/store/squirrelcodingclub.mintspace2.testnet/</a></p>
+                        <p>Smart Contract Address: <a href="https://explorer.testnet.near.org/accounts/cryptosquirrelscodingclub.testnet" target="_blank" rel="noreferrer">https://explorer.testnet.near.org/accounts/cryptosquirrelscodingclub.testnet</a></p>
+                        <p>Smart contract is <a href='https://explorer.testnet.near.org/transactions/DrYvK2Ma2tr6hqpzpkweRiJ8hgVKSRFzxr3ZBGSZq1T2' target="_blank" rel="noreferrer">created on Near protocol</a>  and the NFTs are minted on testnet protocol </p>
+                        <p>Mintbase.io store link: <a href="https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet/" target="_blank" rel="noreferrer">https://testnet.mintbase.io/store/squirrelcodingclub.mintspace2.testnet/</a></p>
                     </div>
                 </section>
 

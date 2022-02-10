@@ -2,6 +2,7 @@ Crypto Squirrels Coding Club
 ==========
 
 Live at [https://crypto-squirrels-coding-club.herokuapp.com](https://crypto-squirrels-coding-club.herokuapp.com)
+Mintbase Store: https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet/mint
 
 Roadmap
 ========
@@ -13,6 +14,7 @@ Roadmap
 - [ ] Create squirrel edition on Mintbase.io
 
 Resource: https://github.com/near/corgis
+https://mintbase-testnet.hasura.app/api/rest/stores/squirrelcodingclub.mintspace2.testnet
 
 Quick Start
 ===========

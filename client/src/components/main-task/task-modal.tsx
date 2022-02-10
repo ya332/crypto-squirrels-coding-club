@@ -19,7 +19,7 @@ function Modal({isOpen, onClose}: Props) {
 
     if (error) toast.error(error)
 
-    document.location.assign('/')
+    document.location.assign('/thebackyard')
   }
 
   return (

@@ -6,6 +6,7 @@ import GlobalStyles from './utils/global-styles'
 import { darkTheme, lightTheme } from './utils/theme'
 import { useTheme } from './store/themeContext'
 import { AuthProvider } from './store/authContext'
+import { WalletProvider } from './store/walletContext';
 import Landing from './components/landing/Landing'
 import {
   LoginPage,
@@ -18,28 +19,27 @@ import {
 
 import 'react-toastify/dist/ReactToastify.css'
 import 'regenerator-runtime/runtime';
-import PropTypes from 'prop-types';
-import Big from 'big.js';
 
-function App(
-  { contract, currentUser, nearConfig, wallet }
-) {
+function App() {
+ 
   const [theme] = useTheme()
-  console.log(wallet, nearConfig)
+
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <AuthProvider>
-        <GlobalStyles />
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={() => <Landing wallet={wallet} nearConfig={nearConfig} currentUser={currentUser} contract={contract} />} />
-            <PrivateRoute exact path="/thebackyard" component={TaskPage} />
-            <Route path="/not-found" component={NotFoundPage} />
-            <PrivateRoute exact path="/thebackyard/:roomId" component={MainPage} />
-            <Redirect to="/not-found" />
-          </Switch>
-        </BrowserRouter>
+        <WalletProvider apiKey={process.env.REACT_APP_MINTBASE_API_KEY || ''}>
+          <GlobalStyles />
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <PrivateRoute exact path="/thebackyard" component={TaskPage} />
+              <Route path="/not-found" component={NotFoundPage} />
+              <PrivateRoute exact path="/thebackyard/:roomId" component={MainPage} />
+              <Redirect to="/not-found" />
+            </Switch>
+          </BrowserRouter>
+        </WalletProvider>
       </AuthProvider>
     </ThemeProvider>
   )

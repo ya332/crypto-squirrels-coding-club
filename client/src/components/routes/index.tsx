@@ -1,26 +1,26 @@
 import {Redirect, Route, RouteProps} from 'react-router-dom'
-import {useAuth} from '../../store/authContext'
+import {useWallet} from '../../store/walletContext'
 
 type Props = {component: any}
 
 export function PrivateRoute({component: Component, ...other}: Props & RouteProps) {
-  const [user] = useAuth()
+  const { wallet, isConnected, details } = useWallet();
 
   return (
     <Route
       {...other}
-      render={props => (user ? <Component {...props} /> : <Redirect to="/" />)}
+      render={props => (isConnected ? <Component {...props} /> : <Redirect to="/" />)}
     />
   )
 }
 
 export function UnauthRoute({component: Component, ...other}: Props & RouteProps) {
-  const [user] = useAuth()
+  const { wallet, isConnected, details } = useWallet();
 
   return (
     <Route
       {...other}
-      render={props => (!user ? <Component {...props} /> : <Redirect to="/" />)}
+      render={props => (!isConnected ? <Component {...props} /> : <Redirect to="/" />)}
     />
   )
 }

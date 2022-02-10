@@ -1,7 +1,9 @@
 import {Fragment, useState} from 'react'
 import ThemeModeSwitch from 'react-dark-mode-toggle'
+import { useHistory } from 'react-router-dom'
 import {useAuth} from '../../store/authContext'
 import {useTheme} from '../../store/themeContext'
+import { useWallet } from '../../store/walletContext'
 import {logout} from '../../utils/api/auth'
 import {Loader} from '../elements'
 import {NewTaskWrapper, Icon, Title, OneLine, LogoutIcon} from './elements'
@@ -12,6 +14,8 @@ function NewTask() {
   const [isOpen, setOpen] = useState(false)
   const [, setUser] = useAuth()
   const [theme, setTheme] = useTheme()
+  const history = useHistory();
+  const {wallet} = useWallet();
 
   const handleThemeToggle = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
@@ -23,6 +27,9 @@ function NewTask() {
     setLoading(false)
 
     setUser(null)
+    wallet?.disconnect();
+    window.location.reload();
+    history.push('/');
   }
 
   return (
