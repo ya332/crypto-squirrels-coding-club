@@ -2,7 +2,9 @@ Crypto Squirrels Coding Club
 ==========
 
 Live at [https://crypto-squirrels-coding-club.herokuapp.com](https://crypto-squirrels-coding-club.herokuapp.com)
-Mintbase Store: https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet/mint
+Mintbase Store: https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet
+Submission to NEAR MetaBUILD Hackathon by Github handle ya332. 
+Contact info: alparslanyigitcan@gmail.com
 
 Roadmap
 ========
@@ -10,8 +12,8 @@ Roadmap
 - [x] Create landing page
 - [x] Migrate CodeTernel code to this repo NEAR
 - [x] Deploy NFT smart contract to testnet
-- [ ] Allow redirecting to The BACKYARD if the user is logged in and has NFT. 
-- [ ] Create squirrel edition on Mintbase.io
+- [x] Allow redirecting to The BACKYARD if the user is logged in and has NFT. 
+- [x] Create squirrel edition on Mintbase.io
 
 Resource: https://github.com/near/corgis
 https://mintbase-testnet.hasura.app/api/rest/stores/squirrelcodingclub.mintspace2.testnet
@@ -31,14 +33,11 @@ Now you'll have a local development environment backed by the NEAR TestNet! Runn
 Exploring The Code
 ==================
 
-1. The backend code lives in the `/assembly` folder. This code gets deployed to
+1. The backend code lives in the `/contract` folder. This code gets deployed to
    the NEAR blockchain when you run `yarn deploy:contract`. This sort of
    code-that-runs-on-a-blockchain is called a "smart contract" – [learn more
    about NEAR smart contracts][smart contract docs].
-2. The frontend code lives in the `/src` folder.
-   [/src/index.html](/src/index.html) is a great place to start exploring. Note
-   that it loads in `/src/index.js`, where you can learn how the frontend
-   connects to the NEAR blockchain.
+2. The frontend code lives in the `/client` folder.
 3. Tests: there are different kinds of tests for the frontend and backend. The
    backend code gets tested with the [asp] command for running the backend
    AssemblyScript tests, and [jest] for running frontend tests. You can run
