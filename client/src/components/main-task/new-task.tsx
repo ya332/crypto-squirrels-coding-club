@@ -28,6 +28,7 @@ function NewTask() {
 
     setUser(null)
     wallet?.disconnect();
+    localStorage.setItem('isMember', JSON.stringify(false));
     window.location.reload();
     history.push('/');
   }

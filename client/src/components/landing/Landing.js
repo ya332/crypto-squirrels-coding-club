@@ -25,6 +25,7 @@ const Landing = () => {
             setOwnedTokenCount(data.token.length);
             setOwnedTokens(data.token);
             let isCurrentUserClubMember = await verifyOwnership(data.token);
+            console.log("isCurrentUserClubMember", isCurrentUserClubMember)
             setIsMember(isCurrentUserClubMember);
             localStorage.setItem('isMember', isCurrentUserClubMember);
         }
