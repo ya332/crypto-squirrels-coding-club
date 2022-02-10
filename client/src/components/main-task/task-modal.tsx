@@ -19,7 +19,7 @@ function Modal({isOpen, onClose}: Props) {
 
     if (error) toast.error(error)
 
-    history.push('/thebackyard')
+    document.location.assign('/thebackyard')
   }
   return (
     <ModalWrapper>

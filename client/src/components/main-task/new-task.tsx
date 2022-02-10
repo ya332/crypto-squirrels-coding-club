@@ -35,7 +35,6 @@ function NewTask() {
 
   return (
     <Fragment>
-      {loading && <Loader />}
       <CreateTaskModal isOpen={isOpen} onClose={() => setOpen(false)} />
       <OneLine>
         <Title>Create a new War Room in the BACKYARD or use an existing one.</Title>
