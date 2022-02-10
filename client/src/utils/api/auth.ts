@@ -56,7 +56,6 @@ export async function signup(data: SignupCredentials) {
 
 export async function persist(data: SignupCredentials) {
   const response = await httpService.post('/user/persist', data)
-  console.log("inside persist", response.data)
   if (response.data.status === 'Success') {
     return response.data.user
   } 

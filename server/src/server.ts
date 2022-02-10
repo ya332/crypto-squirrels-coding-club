@@ -18,7 +18,6 @@ registerRoutes(app)
 app.use(errorHandler())
 
 process.on('uncaughtException', (error) => {
-  console.log("inside uncaughtException line 21", error)
   throw new ApiError('Uncaught server Exception', 500)
 })
 

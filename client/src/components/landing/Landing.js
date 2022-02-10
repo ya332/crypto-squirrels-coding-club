@@ -48,16 +48,12 @@ const Landing = () => {
             try {
                 let savedAndPersistedUser = await persist(data)
                 setUser(savedAndPersistedUser);
-                console.log("savedAndPersistedUser", savedAndPersistedUser)
                 localStorage.setItem('user', JSON.stringify(savedAndPersistedUser))
-                console.log("localStorage.getItem('user')", localStorage.getItem('user'));
-                console.log("localStorage.getItem('isMember')", localStorage.getItem('isMember'));
 
             }
             catch (e) { console.log("Error during signin up user", e) };
 
         }
-        console.log("details", details)
         if (details) fetchData().then(() => { handleUserAuth().catch((err) => console.log(err)); }).catch((err) => console.log(err));
 
     }, [details, isMember])

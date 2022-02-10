@@ -88,7 +88,6 @@ export async function handlePersistUser(
     res: Response,
     next: NextFunction
 ) {
-    console.log("received req.body", req.body);
     try {
         // Find if user is already created
         const user = await $User.findOne({ username: req.body.username });
@@ -105,7 +104,6 @@ export async function handlePersistUser(
             createdUser.password = undefined;
             createdUser.salt = undefined;
             createdUser.__v = undefined;
-            console.log("user created", user);
             res.status(200).cookie("session_id", token, cookieOptions).json({
                 status: "Success",
                 user,
@@ -123,7 +121,6 @@ export async function handlePersistUser(
             });
         }
     } catch (error) {
-        console.log("Inside handlePersistUser error", error);
         next(error);
     }
 }

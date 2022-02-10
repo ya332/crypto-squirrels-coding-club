@@ -9,11 +9,12 @@ Contact info: alparslanyigitcan@gmail.com
 Roadmap
 ========
 - [x] Add Wallet login
-- [x] Create landing page
+- [x] Finalize landing page
 - [x] Migrate CodeTernel code to this repo NEAR
 - [x] Deploy NFT smart contract to testnet
 - [x] Allow redirecting to The BACKYARD if the user is logged in and has NFT. 
 - [x] Create squirrel edition on Mintbase.io
+- [x] Add steps to be a member
 
 Resource: https://github.com/near/corgis
 https://mintbase-testnet.hasura.app/api/rest/stores/squirrelcodingclub.mintspace2.testnet
