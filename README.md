@@ -3,7 +3,7 @@ Crypto Squirrels Coding Club
 
 Live at [https://crypto-squirrels-coding-club.herokuapp.com](https://crypto-squirrels-coding-club.herokuapp.com)
 Mintbase Store: https://testnet.mintbase.io/store/cryptosquirrelsclub.mintspace2.testnet
-Submission to NEAR MetaBUILD Hackathon by Github handle ya332. 
+Submission to NEAR MetaBUILD Hackathon by Yigit Alparslan, (Github handle ya332). 
 Contact info: alparslanyigitcan@gmail.com
 
 Roadmap
